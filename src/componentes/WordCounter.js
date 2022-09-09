@@ -12,7 +12,6 @@ words.forEach(word => {
     })
   }
 });
-<li>repetidos</li>
 console.log(repetidos)
 }
 
