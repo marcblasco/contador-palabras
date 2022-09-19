@@ -1,4 +1,5 @@
 {
+ 
   "name": "contador-palabras",
   "version": "0.1.0",
   "private": true,
@@ -23,6 +24,11 @@
       "react-app/jest"
     ]
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -35,4 +41,5 @@
       "last 1 safari version"
     ]
   }
+  
 }
