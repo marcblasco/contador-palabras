@@ -1,6 +1,4 @@
 import './App.css';
-//import WordCounter from './componentes/WordCounter';
-
 
 function App() {
 
