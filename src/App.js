@@ -20,6 +20,22 @@ function App() {
         if (cleanWord) words.push(cleanWords(cleanWord))
       });
       console.log(words)
+
+      const repeated = []
+      words.forEach(word => {
+        const arrayFilter = words.filter(t => t === word)
+        if (arrayFilter.length >= 0) {
+          if (repeated.filter(r => r.word === word).length === 0) 
+          {
+            repeated.push({word,total: arrayFilter.length})  
+           
+    
+          }
+        }  
+      });
+      const pareto= (repeated.length * 20)/100 
+      console.log (" pareto principle --> "+ pareto)
+      console.log(repeated)
     }
     fileReader.onerror = () =>{
       console.log (fileReader.error)
