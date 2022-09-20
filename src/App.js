@@ -1,15 +1,58 @@
-import logo from './logo.svg';
 import './App.css';
-import WordCounter from './componentes/WordCounter';
 
 function App() {
-  var texto= 'THE ADVENTURES OF SHERLOCK HOLMES Arthur Conan Doyle Table of contents A Scandal in Bohemia The Red-Headed League A Case of Identity The Boscombe Valley Mystery The Five Orange Pips The Man with the Twisted Lip The Adventure of the Blue Carbuncle The Adventure of the Speckled Band The Adventure of the Engineers Thumb The Adventure of the Noble Bachelor The Adventure of the Beryl Coronet The Adventure of the Copper Beeches A SCANDAL IN BOHEMIA  Table of contents Chapter 1 Chapter 2 Chapter 3'
-  return (
+
+  const readFile= (e) => {
+
+    const file = e.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsText(file)
+    fileReader.onload = () =>{
+      const text = fileReader.result
+      const quiteLineBreaks= (string) =>string.replace(/\n/g, ' ');
+      const cleanWords= (word) => word.replace(/[^a-zA-Z'-]/g, '').toLowerCase();
+      const words=[];
+      const textArray = quiteLineBreaks(text).split(' ');
+      textArray.forEach((word) => {
+        const cleanWord= cleanWords(word);
+        if (cleanWord) words.push(cleanWords(cleanWord))
+      });
+      console.log(words)
+
+      const repeated = []
+      words.forEach(word => {
+        const arrayFilter = words.filter(t => t === word)
+        if (arrayFilter.length >= 0) {
+          if (repeated.filter(r => r.word === word).length === 0) 
+          {
+            repeated.push({word,total: arrayFilter.length})  
+           
     
+          }
+        }  
+      });
+      const pareto= (repeated.length * 20)/100 
+      console.log (" pareto principle --> "+ pareto)
+      console.log(repeated)
+    }
+    fileReader.onerror = () =>{
+      console.log (fileReader.error)
+    }
+    return fileReader.result;
+  }
+  return (
+
     <div className="App">
-      <WordCounter/>
+      
+     
+      <input  type="file"   multiple={ false }   onChange={ readFile }/>
+
     </div>
+    
+    
   );
+
 }
+
 
 export default App;
